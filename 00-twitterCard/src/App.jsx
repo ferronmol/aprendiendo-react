@@ -1,37 +1,40 @@
-import { useState } from 'react'
+
 import './App.css'
 import { TwitterFollowCard } from './TwitterFollowCard'
 
 export function App () {
-   const format = (userName) => `@${userName}`
-   const [name, setName] = useState('ferronmol')
+  
+
+   const users = [
+    {
+      userName: 'ferronmol',
+      name: 'Juan Ferron',
+      isFollowing: true
+    },
+    {
+      userName: 'midudev',
+      name: 'Miguel Angel Duran',
+      isFollowing: false
+    },
+    {
+      userName: 'mouredev',
+      name: 'Brais Moure',
+      isFollowing: true
+    }
+
+   ]
 
 return (
     <section className="App">
-      <TwitterFollowCard 
-        formatUserName={format}
-        
-        userName= {name} 
-        initialIsFollowing= {true}> 
-         JF Desing
-      </TwitterFollowCard>
-        
-      <TwitterFollowCard 
-        formatUserName={format} 
-        
-        userName= 'midudev' >
-          Miguel Angel Duran
-      </TwitterFollowCard>
-
-      <TwitterFollowCard 
-       formatUserName={format}
-       
-       userName= "mouredev" >
-         Brais Moure
-      </TwitterFollowCard>
-
-      <button onClick={() => setName('mouredev')}>Cambio Nombre</button>
-      
+      {  
+        users.map(({userName, name, isFollowing }) => (  
+            <TwitterFollowCard key={userName}
+              userName = {userName}
+              initialIsFollowing = {isFollowing}>
+              {name}
+            </TwitterFollowCard>
+      ))
+    }
     </section>
   )
 }
